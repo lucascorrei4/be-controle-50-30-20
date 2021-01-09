@@ -1,0 +1,16 @@
+{
+  "production": false,
+  "urlService": "https://apihomol.ebarn.com.br",
+  "urlServerCms": "http://localhost:4200/api",
+  "urlServerCatmat": "http://localhost:4200/api/catmat",
+  "urlPay": "https://payhomol.ebarn.com.br",
+  "db": {
+    "host": "ebarn-homol.c5eh9o8vypl2.us-east-2.rds.amazonaws.com",
+    "port": 5432,
+    "username": "usr_ebarn",
+    "password": "Z5)bB]a-Gh",
+    "database": "ebarn"
+  },
+  "mongodb": "mongodb://localhost:27017/controle-homol",
+  "urlAppNode": "https://apinodehomol.ebarn.com.br"
+}

@@ -1,0 +1,189 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice</title>
+</head>
+
+<body>
+  <div class="invoice">
+    <header>
+      <div class="invoice-detalhes-empresa">
+        <div class="info-ebarn">
+          <img src="{{ logo }}" class="logo" width="40px">
+          <div>
+            <p>EBARN PORTAL DE NEGOCIOS AGRICOLAS LTDA</p>
+            <p>CNPJ: 31.583.349/0001-27</p>
+            <p>Rua Tocantins, Quadra 120 Lote 10 Sala 01, Vila Jaiara</p>
+            <p>Anápolis, GO - 75.064-500</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="invoice-id">
+            <h2>INVOICE</h2>
+            <p>#{{ merchantPaymentCode }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-detalhes-cliente">
+        <p class="subtitle">Para</p>
+        <div class="content">
+          <div class="dados-cliente">
+            <p>{{ dataPayment.name }}</p>
+            <p>{{ labelDocument }}: {{ document }}</p>
+            <p>{{ dataPayment.address }}</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="invoice-detalhes-itens">
+      <table>
+        <tr>
+          <th class="index">#</th>
+          <th class="produto">Item</th>
+          <th class="dt-pagamento">Dt. Pagamento</th>
+          <th class="valor">Valor</th>
+        </tr>
+
+        <tr>
+          <td class="index">1</td>
+          <td class="produto">{{ type }}<br /><small>{{ produto }} - {{ desc }}</small></td>
+          <td class="dt-pagamento">{{ confirmDate }}</td>
+          <td class="valor">{{ amountTotal }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="invoice-section">
+      <div class="info-lote">
+        <h2 class="subtitle">Informações do Lote #{{ idLote }}:</h2>
+        <div class="content">
+          <div class="col">
+            <div class="row">
+              <small>Comprador:</small>
+              <p>{{ comprador.nome }}</p>
+            </div>
+            <div class="row">
+              <small>{{ comprador.labelCnpj }}:</small>
+              <p>{{ comprador.cnpj }}</p>
+            </div>
+            <div class="row">
+              <small>Grão:</small>
+              <p>{{ produto }} - {{ desc }}</p>
+            </div>
+            <div class="row">
+              <small>Quantidade:</small>
+              <p>{{ qtd }} sc</p>
+            </div>
+            <div class="row">
+              <small>Preço/Sc:</small>
+              <p>{{ preco }}</p>
+            </div>
+            <div class="row">
+              <small>Valor Total:</small>
+              <p>{{ totalLote }}</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <small>Vendedor:</small>
+              <p>{{ vendedor.nome }}</p>
+            </div>
+            <div class="row">
+              <small>{{ vendedor.labelCnpj }}:</small>
+              <p>{{ vendedor.cnpj }}</p>
+            </div>
+            <div class="row">
+              <small>Dt. Disponibilidade:</small>
+              <p>{{ dataDisponibilidade }}</p>
+            </div>
+            <div class="row">
+              <small>Dt. Limite Embarque:</small>
+              <p>
+                De {{ dataInicialLimiteEntrega }} Até {{ dataFinalLimiteEntrega }}
+              </p>
+            </div>
+            <div class="row">
+              <small>Forma de Pagamento:</small>
+              <p>{{ formaPagamento }}</p>
+            </div>
+            <div class="row">
+              <small>Tipo do Frete:</small>
+              <p>{{ tipoFrete }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="endereco-retirada">
+      <small>End. Retirada:</small>
+      <p>{{ enderecoRetirada }}</p>
+    </div>
+
+
+    <div class="invoice-section">
+      <div class="forma-pagamento">
+        <h2 class="subtitle">Pagamento: </h2>
+        <div class="content mt-2">
+          <div class="row status">
+            <small>Status:</small>
+            <p>{{ status }}</p>
+          </div>
+          <div class="row">
+            <small>Forma do Pagamento:</small>
+            <p>{{ methodPayment }}</p>
+          </div>
+
+          {{#if isCartaoCredito}}
+            <div class="row">
+              <small>Títular: </small>
+              <p>
+                {{ dataPayment.cardName }}
+              </p>
+            </div>
+            <div class="row">
+              <small>Número do Cartão:</small>
+              <p>{{ dataPayment.cardNumber }}</p>
+            </div>
+
+            <div class="aviso">
+              ATENÇÃO: Em sua fatura aparecerá a descrição “EBANX*EBARN”
+            </div>
+          {{else}}
+          <div class="row">
+            <small>Data Vencimento: </small>
+            <p>
+              {{ dueDate }}
+            </p>
+          </div>
+          {{#if showWarningBoleto}}
+            <div class="aviso">
+              ATENÇÃO: O boleto será compensado em até 72 horas após o pagamento
+            </div>
+          {{/if}}
+        {{/if}}
+        </div>
+      </div>
+      <div class="detalhamento-valor-total">
+        <h2 class="subtitle">Total</h2>
+        <div class="content mt-2">
+          <div class="row">
+            <p>Valor Negociação</p>
+            <p>{{ totalLote }}</p>
+          </div>
+          <div class="row">
+            <p>Tx. Intermediação %</p>
+            <p>{{ tax }}</p>
+          </div>
+          <div class="row">
+            <p>Total</p>
+            <p>{{ amountTotal}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

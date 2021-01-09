@@ -1,0 +1,667 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contrato</title>
+</head>
+
+<body>
+  <div class="invoice">
+    <header>
+      <div class="invoice-detalhes-empresa">
+        <div>
+          <p>{{ infoProdutor.line1 }}</p>
+          <p>{{ infoProdutor.line2 }}</p>
+          <p>{{ infoProdutor.line3 }}</p>
+          <p>Resp. Acompanhamento: {{ infoProdutor.line4 }}</p>
+        </div>
+        <div class="text-right">
+          <div class="invoice-id">
+            <h2>CONTRATO</h2>
+            <p>#CON-{{ infoLote.idProposta }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-detalhes-cliente">
+        <p class="subtitle">Cobrança Para</p>
+        <div class="content">
+          <div class="dados-cliente">
+            <p>{{ infoIndustria.line1 }}</p>
+            <p>{{ infoIndustria.line2 }}</p>
+            <p>{{ infoIndustria.line3 }}</p>
+            <p>Resp. Acompanhamento: {{ infoIndustria.line4 }}</p>
+          </div>
+          <div class="text-right">
+            <div class="invoice-info">
+              <p class="label">Data do Contrato:</p>
+              <p class="value">{{ infoLote.dataContrato }}</p>
+            </div>
+            <div class="invoice-info">
+              <p class="label">Forma de Pagamento:</p>
+              <p class="value">{{ infoLote.formaPagamento }}</p>
+            </div>
+            <div class="invoice-info">
+              <p class="label">Data Limite Embarque:</p>
+              <p class="value">{{ infoLote.dataFinalLimiteEntrega }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="invoice-detalhes-itens">
+      <table>
+        <tr>
+          <th class="index">#</th>
+          <th class="produto">Item</th>
+          <th class="qtd">Qtd.</th>
+          <th class="preco">Preço/Sc</th>
+          <th class="total">Total</th>
+        </tr>
+
+        <tr>
+          <td class="index">1</td>
+          <td class="produto">{{ item.produto }}<br /><small>{{ item.desc }}</small></td>
+          <td class="qtd">{{ item.qtd }} sc</td>
+          <td class="preco">{{ item.preco }}</td>
+          <td class="total">{{ item.total }}</td>
+        </tr>
+      </table>
+
+      <div class="endereco-retirada">
+        <small>End. Retirada:</small>
+        <p>{{ infoLote.enderecoRetirada }}</p>
+      </div>
+      <div class="invoice-detalhes-pagamento">
+        <div class="forma-pagamento">
+          <h2 class="subtitle">Informações do Lote:</h2>
+          <div class="content mt-2">
+            <div class="row">
+              <small>Dt. Disponibilidade:</small>
+              <p>{{ infoLote.dataDisponibilidade }}</p>
+            </div>
+            <div class="row">
+              <small>Dt. Limite Embarque:</small>
+              <p>
+                De {{ infoLote.dataInicialLimiteEntrega }} Até {{ infoLote.dataFinalLimiteEntrega }}
+              </p>
+            </div>
+            <div class="row">
+              <small>Forma de Pagamento:</small>
+              <p>{{ infoLote.formaPagamento }}</p>
+            </div>
+            <div class="row">
+              <small>Tipo do Frete:</small>
+              <p>{{ infoLote.tipoFrete }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="detalhamento-valor-total">
+          <h2 class="subtitle">Total</h2>
+          <div class="content mt-2">
+            <div class="row">
+              <p>Subtotal</p>
+              <p>{{ infoLote.subtotal }}</p>
+            </div>
+            <div class="row">
+              <p>Frete</p>
+              <p>R$ 0,00</p>
+            </div>
+            <div class="row">
+              <p>Total</p>
+              <p>{{ infoLote.total }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {{#if producerSubject}}
+  <div class="assinaturas" style="margin-top: -5px;">
+    <div class="assinatura">
+      <img class="logo-ebarn" src="{{ logo }}" />
+      <div class="img">
+        <img src="{{ sign.produtor }}" />
+      </div>
+      <div class="info">
+        <p>{{ producerSubject.name }}</p>
+        <p>{{ producerSubject.cpf }}</p>
+        <p>{{ producerSubject.dateSign }}</p>
+      </div>
+      <p class="placeholder">{{ infoProdutor.razaoSocial }} - Vendedor</p>
+    </div>
+
+    <div class="assinatura">
+      <img class="logo-ebarn" src="{{ logo }}" />
+      <div class="img">
+        <img src="{{ sign.industria }}" />
+      </div>
+      <div class="info">
+        <p>{{ industrySubject.name }}</p>
+        <p>{{ industrySubject.cpf }}</p>
+        <p>{{ industrySubject.dateSign }}</p>
+      </div>
+      <p class="placeholder">{{ infoIndustria.razaoSocial }} - Comprador</p>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="contrato">
+    <h1 class="titulo-contrato text-center">CONTRATO DE COMPRA E VENDA DE GRÃOS</h1>
+
+    <p>
+      <b>COMPRADOR: {{ infoIndustria.razaoSocial }}</b>, inscrita no {{#if infoIndustria.isPJ}} CNPJ {{else}} CPF
+      {{/if}} sob nº {{ infoIndustria.cnpj }}, com sede na
+      {{ infoIndustria.endereco.logradouro }}, nº {{ infoIndustria.endereco.numero }}, Bairro
+      {{ infoIndustria.endereco.bairro }}, cidade de {{ infoIndustria.endereco.cidadeObj.nome }}, no estado de
+      {{ infoIndustria.endereco.ufObj.nome }}, ora
+      representada na forma de seus atos constitutivos por quem ao final assina.
+    </p>
+    <p>
+      <b>VENDEDOR: {{ infoProdutor.razaoSocial }}</b>, inscrita no {{#if infoProdutor.isPJ}} CNPJ {{else}} CPF
+      {{/if}} sob nº {{ infoProdutor.cnpj }}, com sede na
+      {{ infoProdutor.endereco.logradouro }}, nº {{ infoProdutor.endereco.numero }}, Bairro
+      {{ infoProdutor.endereco.bairro }}, cidade de {{ infoProdutor.endereco.cidadeObj.nome }}, no estado de
+      {{ infoProdutor.endereco.ufObj.nome }}, ora
+      representada na forma de seus atos constitutivos por quem ao final assina.
+    </p>
+    <p>
+      <b>INTERVENIENTE ANUENTE: EBARN PORTAL DE NEGOCIOS AGRICOLAS LTDA</b>, pessoa jurídica,
+      inscrita no CNPJ: 31.583.349/0001-27, com sede na Rua Tocantins, Quadra 120 Lote 10 Sala 01,
+      CEP: 75.064-500, Vila Jaiara, Anápolis – GO, ora representada na forma de seus atos
+      constitutivos por quem ao final assina.
+    </p>
+    <p>
+      Por meio do presente <b>CONTRATO DE COMPRA E VENDA DE GRÃOS</b> (“Contrato”), COMPRADOR e
+      VENDEDOR, acima identificados, serão doravante se, em conjunto, denominados de “Partes” e,
+      em separado e indistintamente, de “Parte”.
+    </p>
+    <p><b>Considerando que:</b></p>
+    <p>
+      <b>(I)</b> As Partes são usuários da plataforma “eBarn”, <b>INTERVENIENTE ANUENTE</b> deste
+      Contrato, que visa promover a negociação entre produtores rurais, fornecedores e indústrias,
+      de modo que a partir da utilização dos serviços da plataforma, as Partes decidiram pela
+      conclusão do presente Contrato.
+    </p>
+    <p>
+      <b>(II)</b> As Partes estão cientes e de acordo, enquanto usuárias da plataforma “eBarn”,
+      com os Termos de Uso e Política de Privacidade, bem como de seus direitos e obrigações
+      perante todos os envolvidos na negociação.
+    </p>
+    <p>
+      Assim, este Contrato visa detalhar as condições de compra e venda dos grãos negociados,
+      estabelecendo os direitos e obrigações das Partes, devendo ser interpretando de acordo com a
+      legislação vigente e as boas-práticas comerciais.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA PRIMEIRA – DO OBJETO</p>
+    <p>
+      <b>1.1.</b> O objeto deste Contrato é a compra e venda do produto abaixo descrito, com as
+      seguintes características:
+    </p>
+    <div class="descricao-produto">
+      <p>Produto: {{ item.produto }} - <span style="text-transform: capitalize;">{{ item.desc }}</span></p>
+      <p>Quantidade: {{ item.qtd }}</p>
+      <p>Unidade de Medida: Saca</p>
+      {{#if infoLote.safra}} <p>Safra(s): {{ infoLote.safra }}</p> {{/if}}
+    </div>
+    {{#if infoLote.tabelaClassificacao}}
+    <div class="tabela-classificacao">
+      <p><b>1.2.</b> O Produto acima descrito comporta a seguinte qualidade e seus respectivos descontos por unidade:</p>
+      {{#if infoLote.notaPeneira}}
+      <p>Notas de avaliação informadas:</p>
+        {{#if infoLote.notaPeneira.avaliacaoPeneira12.mostrar}}
+        <p>Peneira 12: {{{ infoLote.notaPeneira.avaliacaoPeneira12.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.avaliacaoPeneira11.mostrar}}
+        <p>Peneira 11: {{{ infoLote.notaPeneira.avaliacaoPeneira11.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.avaliacaoPeneira10.mostrar}}
+        <p>Peneira 10: {{{ infoLote.notaPeneira.avaliacaoPeneira10.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.avaliacaoPeneira09.mostrar}}
+        <p>Peneira 09: {{{ infoLote.notaPeneira.avaliacaoPeneira09.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.avaliacaoFundo.mostrar}}
+        <p>Fundo: {{{ infoLote.notaPeneira.avaliacaoFundo.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.umidade.mostrar}}
+        <p>Umidade: {{{ infoLote.notaPeneira.umidade.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.germinado.mostrar}}
+        <p>Germinado: {{{ infoLote.notaPeneira.germinado.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.caruncho.mostrar}}
+        <p>Caruncho: {{{ infoLote.notaPeneira.caruncho.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.lagartas.mostrar}}
+        <p>Lagartas: {{{ infoLote.notaPeneira.lagartas.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.bandinha.mostrar}}
+        <p>Bandinha: {{{ infoLote.notaPeneira.bandinha.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.avariados.mostrar}}
+        <p>Avariados: {{{ infoLote.notaPeneira.avariados.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.mofadoseArdidos.mostrar}}
+        <p>Mofados e Ardidos: {{{ infoLote.notaPeneira.mofadoseArdidos.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.impurezas.mostrar}}
+        <p>Impurezas: {{{ infoLote.notaPeneira.impurezas.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.percevejo.mostrar}}
+        <p>Percevejo: {{{ infoLote.notaPeneira.percevejo.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.milho.mostrar}}
+        <p>Milho: {{{ infoLote.notaPeneira.milho.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.soja.mostrar}}
+        <p>Soja: {{{ infoLote.notaPeneira.soja.nota }}}%</p>
+        {{/if}}
+        {{#if infoLote.notaPeneira.turrao.mostrar}}
+        <p>Turrão: {{{ infoLote.notaPeneira.turrao.nota }}}%</p>
+        {{/if}}
+      {{/if}}
+      <div>
+        {{{ infoLote.tabelaClassificacao }}}
+      </div>
+    </div>
+    {{/if}}
+
+    <p class="subtitulo-clausula">CLÁUSULA SEGUNDA – DO PAGAMENTO</p>
+    <p>
+      <b>2.1.</b> Em decorrência da compra do Produto descrito na Cláusula Primeira, o
+      <b>COMPRADOR</b> se obriga a pagar ao <b>VENDEDOR</b> os valores aqui previstos e da
+      seguinte forma:
+    </p>
+    <div class="subsecao">
+      <p><b>2.1.1.</b> Preço por saca de 60kg (sessenta quilos) líquidos: {{ item.preco }} ({{ infoLote.precoExtenso }})
+      </p>
+      <p><b>2.1.2.</b> Preço Total: {{ item.total }} ({{ infoLote.totalExtenso }})</p>
+    </div>
+    <p>
+      <b>2.2.</b> A nota fiscal deverá ser emitida para: {{ infoIndustria.razaoSocial }}, endereço
+      {{ infoIndustria.endereco.logradouro }}, {{ infoIndustria.endereco.complemento }}, nº
+      {{ infoIndustria.endereco.numero }}, Bairro {{ infoIndustria.endereco.bairro }}, cidade de
+      {{ infoIndustria.endereco.cidadeObj.nome }}, estado de {{ infoIndustria.endereco.ufObj.nome }}, CEP:
+      {{ infoIndustria.endereco.cep }}, Inscrição
+      Estadual {{ infoIndustria.endereco.ie }}.
+    </p>
+    <p>
+
+      {{#if contaBancaria}}
+      <b>2.3.</b> O pagamento dos valores constantes na cláusula 2.1 será realizado por meio de
+      transferência bancária para conta de titularidade do <b>VENDEDOR,</b> cujos dados são:
+      {{ infoProdutor.razaoSocial }} - Titular da Conta: {{contaBancaria.nomeCorrentista}},
+      {{#if infoProdutor.isPJ}}CNPJ{{else}}CPF{{/if}}:
+      {{ contaBancaria.cnpj }}, Banco: {{ contaBancaria.nomeBanco }}, Agência: {{ contaBancaria.agencia }}, Conta
+      {{ contaBancaria.tipoCorrentePoupanca }}: {{ contaBancaria.contaDV }}.
+      {{else}}
+      <b>2.3.</b> O pagamento dos valores constantes na cláusula 2.1 será realizado por meio de
+      transferência bancária para conta de titularidade do <b>VENDEDOR,</b> cujos dados serão mostrados no contrato
+      assinado.
+      {{/if}}
+    </p>
+    <div class="subsecao">
+      <p>
+        <b>2.3.1.</b> Eventuais tarifas bancárias decorrentes das transações deverão ser arcadas
+        integralmente pelo <b>COMPRADOR</b>.
+      </p>
+    </div>
+    <p>
+      <b>2.4.</b> O pagamento está condicionado a entrega do Produto, de modo que (i) caso toda a
+      quantidade avençada do Produto seja entregue de uma única vez, o <b>COMPRADOR</b> deverá
+      realizar o pagamento integral do Preço Total em até 72h (setenta e duas horas) da entrega do
+      Produto; (ii) na hipótese do Produto ser entregue de modo parcelado, o
+      <b>COMPRADOR</b> deverá realizar o pagamento corresponde à quantidade de sacas entregues, em
+      até 72h (setenta e duas horas) da entrega.
+    </p>
+    <div class="subsecao">
+      <p>
+        <b>2.4.1.</b> Em caso de mora no pagamento, o <b>COMPRADOR</b> ficará sujeito à juros
+        moratórios de 1% (um por cento) ao mês e multa moratória no valor de 2% (dois por cento)
+        sobre o valor devido.
+      </p>
+    </div>
+    <p>
+      <b>2.5.</b> Os valores constantes na Cláusula 2.1 são definitivos e inalteráveis pelas
+      Partes, independentemente de variações de preço que ocorrerem no mercado ou mesmo na
+      plataforma “eBarn”.
+    </p>
+    <p>
+      <b>2.6.</b> O(s) comprovante(s) de depósito(s) decorrente(s) do(s) pagamento(s) efetivado(s)
+      pelo <b>COMPRADOR</b>, liberam-no de modo pleno, irrevogável e irretratável, dando-lhe
+      completa quitação em relação aos valores pagos, não podendo o <b>VENDEDOR</b> a qualquer
+      tempo e por qualquer meio nada reclamar.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA TERCEIRA – DAS CONDIÇÕES DE ENTREGA</p>
+    <p><b>3.1.</b> A entrega do Produto poderá ocorrer da seguinte forma:</p>
+    <div class="subsecao">
+      <p>
+        <b>3.1.2.</b> O <b>VENDEDOR</b> ficará responsável por realizar o transporte do Produto,
+        respondendo pelos riscos e eventuais seguros, devendo entregá-lo no seguinte endereço:
+        {{ infoLote.enderecoRetirada }}.
+      </p>
+      <p>
+        <b>3.1.2.</b> O <b>COMPRADOR</b> ficará responsável por retirar o Produto na sede do
+        <b>VENDEDOR</b>, seja diretamente ou utilizando serviços de transportadoras, ficando
+        responsável pelos riscos e eventuais seguros.
+      </p>
+    </div>
+    <div>
+      <p>
+        <b>3.2.</b> Os prazos de entrega ou de retirada, conforme o caso, com as respectivas
+        quantidades do Produto, são as seguintes:
+      </p>
+
+      <table>
+        <tr>
+          <th>QUANTIDADE (por saca de 60kg líquidos)</th>
+          <th>PRAZO DE ENTREGA</th>
+          <th>PRAZO DE RETIRADA</th>
+        </tr>
+        <tr>
+          <td>{{ item.qtd }}</td>
+          <td>{{ infoLote.dataDisponibilidade }}</td>
+          <td>De {{ infoLote.dataInicialLimiteEntrega }} Até {{ infoLote.dataFinalLimiteEntrega }}</td>
+        </tr>
+      </table>
+    </div>
+    <p>
+      <b>3.3.</b> O <b>VENDEDOR</b> deverá realizar na origem a classificação do Produto, pesagem
+      e controle de qualidade, devendo entregar tal relatório ao <b>COMPRADOR</b> ou a seu
+      representante, no ato da entrega ou retirada do Produto, sendo o único e exclusivo
+      responsável pela precisão dos dados informados.
+    </p>
+    <p>
+      <b>3.4.</b> Em caso de mora na entrega por parte do <b>VENDEDOR</b>, este ficará sujeito a
+      redução de 1% (um por cento) do respectivo valor devido por dia de atraso.
+    </p>
+    <div class="subsecao">
+      <p>
+        <b>3.4.1.</b> Se, em decorrência da mora, a prestação se tornar inútil ao
+        <b>COMPRADOR</b>, este fará jus a penalidade prevista na Cláusula Oitava, sem prejuízo de
+        perdas e danos e lucros cessantes.
+      </p>
+    </div>
+    <p class="subtitulo-clausula">CLÁUSULA QUARTA – DA AFERIÇÃO DA QUALIDADE DO PRODUTO</p>
+    <p>
+      <b>4.1.</b> O <b>VENDEDOR</b> garante ao <b>COMPRADOR</b> que a qualidade do Produto não
+      ultrapassará os percentuais estabelecidos na cláusula 1.1. deste Contrato e na hipótese do
+      Produto ser retirado pelo <b>COMPRADOR</b> nos armazéns do <b>VENDEDOR</b>, a aferição de
+      peso e de qualidade será realizada no ato da retirada (do embarque), estando expressamente
+      ajustado entre as Partes que não serão admitidas cargas com qualidade inferior à contratada
+      (com percentual maior de umidade, de impurezas, etc.), descritas na cláusula 1.2, e que,
+      caso isso ocorra, fica a exclusivo critério do <b>COMPRADOR</b> recusar e não receber o
+      Produto, correndo todos os custos e prejuízos relacionados à devolução do Produto às
+      exclusivas expensas do <b>VENDEDOR</b>.
+    </p>
+    <p>
+      <b>4.2.</b> As quantidades do Produto entregues pelo <b>VENDEDOR</b> comprovar-se-ão, quanto
+      ao peso líquido bruto e peso líquido final a lhe ser creditado, pelos documentos de
+      recebimento emitidos pelo <b>COMPRADOR</b>, permanecendo as amostras à disposição do
+      <b>VENDEDOR</b> pelo prazo de 72h (setenta e duas horas), contado da data de
+      entrega/retirada do Produto. Uma vez decorrido o prazo de 72h (setenta e duas horas), as
+      Partes estabelecem de comum acordo que não mais será aceita qualquer reclamação sobre a
+      classificação e quanto à rejeição do Produto.
+    </p>
+    <p>
+      <b>4.3.</b> O <b>VENDEDOR</b> expressamente reconhece e acorda que o <b>COMPRADOR</b> poderá
+      recusar cargas contaminadas com sementes tóxicas, sementes tratadas/inoculadas, ou ainda,
+      caso o Produto apresente resíduos de aflatoxina ou pesticidas acima dos limites
+      estabelecidos pela legislação vigente, correndo às exclusivas expensas do
+      <b>VENDEDOR</b> todos os custos e prejuízos advindos da recusa, de modo que caso tenha
+      ocorrido algum pagamento o <b>VENDEDOR</b> deverá reembolsá-lo ao <b>COMPRADOR</b> em até
+      72h (setenta e duas horas).
+    </p>
+    <p>
+      <b>4.4.</b> O <b>VENDEDOR</b> declara que o Produto objeto do presente Contrato foi e/ou
+      será produzido de acordo com as normas aprovadas pelo Ministério da Agricultura.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA QUINTA –RESPONSABILIDADES DAS PARTES</p>
+    <p><b>5.1.</b> São responsabilidades do <b>VENDEDOR</b>:</p>
+    <div class="subsecao">
+      <p><b>5.1.1.</b> Realizar a entrega do Produto, na qualidade e prazos aqui avençados.</p>
+      <p>
+        <b>5.1.2.</b> Produzir o Produto ora contratado respeitando integralmente a legislação
+        trabalhista, previdenciária e social, bem como os demais dispositivos legais relacionados
+        à proteção dos direitos humanos, abstendo-se, principalmente, de impor aos seus
+        colaboradores condições ultrajantes ou subumanas de trabalho, de restringir o direito
+        constitucional de ir e vir ou de ameaçá-los ou agredi-los fisicamente por qualquer razão
+        que seja, inclusive, por dívidas de qualquer natureza.
+      </p>
+      <p>
+        <b>5.1.3.</b> Ter e manter às suas próprias custas e responsabilidades, nos prazos legais,
+        todos os registros, licenças, autorizações, aprovações, alvarás, vistorias e outras
+        exigências formuladas pelas autoridades competentes para a regulamentação de sua
+        atividade, tais como entidades fiscalizadoras do exercício das profissões, Ministérios e
+        Secretarias da Saúde, do Trabalho e do Meio Ambiente, Instituto Nacional da Propriedade
+        Industrial - INPI, agências regulatórias, Banco Central do Brasil, órgãos da Administração
+        Pública Direta e Indireta, IBAMA, dentre outros
+      </p>
+      <p>
+        <b>5.1.4.</b> Não realizar suas atividades em áreas desflorestadas após 07/2008 e não
+        utilizar como recurso trabalho forçado, análogo ao de escravo ou prisional, ou mediante a
+        utilização de trabalhadores com idade inferior à mínima legal, ou ainda com violação às
+        normas legais sobre salário-mínimo, jornada de trabalho, dentre outras
+      </p>
+      <p>
+        <b>5.1.5.</b> Fazer uso racional dos agrotóxicos durante todas as etapas do processo
+        (plantio, desenvolvimento e colheita), seguindo receituários agronômicos e respeitando os
+        períodos de carência, garantindo atendimento à legislação vigente, devendo responder
+        diretamente por quaisquer danos que o seu Produto venha a causar a terceiros ou ao
+        <b>COMPRADOR</b>.
+      </p>
+      <p>
+        <b>5.1.6.</b> Utilizar imóvel/área que respeite as normas ambientais e as diretivas dos
+        órgãos oficiais de proteção, não cultivando em áreas que sejam afetadas por requisitos
+        legais tocantes à proteção ambiental, de ecossistemas ou espécies raras, ou que, uma vez
+        que parte da propriedade esteja dentro de tais áreas protegidas, declara que cumpre com
+        todos os requisitos legais específicos relacionados às atividades agrícolas neste(s)
+        imóvel(is).
+      </p>
+      <p>
+        <b>5.1.7.</b> Correm por conta e risco exclusivos do <b>VENDEDOR</b> todos os riscos
+        decorrentes de casos fortuitos e/ou de força maior, até a efetiva entrega do Produto ao
+        <b>COMPRADOR</b>, sendo que o <b>VENDEDOR</b> se obriga a proceder com o primeiro Produto
+        que colher e/ou receber, respeitados os prazos e condições acima estipulados.
+      </p>
+      <p>
+        <b>5.1.8.</b> Esclarecer plenamente seus empregados, caso possua, sobre as condições do
+        contrato ora pactuado, cuidando para a observância das obrigações assumidas e visando
+        prevenir erros de expectativas e interpretação.
+      </p>
+      <p>
+        <b>5.1.9.</b> Prestar informações verdadeiras e precisas, responsabilizando-se por
+        quaisquer prejuízos decorrentes da falsidade ou inexatidão dos dados e informações
+        transmitidas.
+      </p>
+      <p>
+        <b>5.1.10.</b> Não ceder ou transferir o presente Contrato, ou qualquer direito decorrente
+        dele, sem expresso consentimento do <b>COMPRADOR</b>.
+      </p>
+    </div>
+    <p><b>5.2.</b> São responsabilidades do <b>COMPRADOR</b>:</p>
+    <div class="subsecao">
+      <p>
+        <b>5.2.1.</b> Realizar os pagamentos dos valores, na forma e prazos avençados, conforme o
+        disposto na Cláusula Segunda.
+      </p>
+      <p>
+        <b>5.2.2.</b> Esclarecer plenamente seus empregados, caso possua, sobre as condições do
+        contrato ora pactuado, cuidando para a observância das obrigações assumidas e visando
+        prevenir erros de expectativas e interpretação.
+      </p>
+      <p>
+        <b>5.2.3.</b> Prestar informações verdadeiras e precisas, responsabilizando-se por
+        quaisquer prejuízos decorrentes da falsidade ou inexatidão dos dados e informações
+        transmitidas.
+      </p>
+    </div>
+    <p class="subtitulo-clausula">CLÁUSULA SEXTA - DESPESAS E TRIBUTOS</p>
+    <p>
+      <b>6.1.</b> As despesas que o <b>VENDEDOR</b> venha a efetuar para o exercício do presente
+      Contrato correrão por conta exclusiva deste, cabendo ao <b>COMPRADOR</b> somente realizar os
+      pagamentos previstos na Cláusula Segunda.
+    </p>
+    <p>
+      <b>6.2.</b> Ainda, cada Parte responderá, de forma individual e exclusiva, pelos tributos e
+      encargos que sejam de sua titularidade passiva.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA SÉTIMA – VIGÊNCIA E RESCISÃO</p>
+    <p><b>7.1.</b>O prazo de vigência do presente Contrato é de 12 (meses), renovado automaticamente por igual período
+      em caso de não manifestação das partes. Não havendo interesse na renovação, qualquer uma das partes poderá
+      solicitar o encerramento contratual, mediante aviso com no mínimo 30 (trinta) dias do final do contrato.</p>
+    <p>
+      <b>7.2.</b> 7.2. A rescisão imotivada por quaisquer das Partes ante do vencimento contratual, implica em multa
+      equivalente à 20% (vinte por cento) do valor total do Contrato, de modo que a Parte que optar pela resilição
+      deverá informar a outra com antecedência mínima de 30 (trinta) dias.
+    </p>
+    <p>
+      <b>7.3.</b> O presente Contrato poderá ser rescindido motivadamente nos seguintes casos,
+      independentemente de qualquer notificação prévia, facultada à parte inocente:
+    </p>
+    <div class="subsecao">
+      <p>
+        <b>7.3.1.</b> O <b>VENDEDOR</b> não entregue o Produto no(s) prazo(s) e na qualidade aqui
+        avençado(s).
+      </p>
+      <p>
+        <b>7.3.2.</b> O <b>COMPRADOR</b> não pague o(s) valor(es) acordado(s) na Cláusula Segunda,
+        desde que o <b>VENDEDOR</b> já tenha cumprido com a sua prestação.
+      </p>
+      <p>
+        <b>7.3.3.</b> Descumprimento de quaisquer obrigações principais e/ou acessórias constantes
+        neste Contrato.
+      </p>
+      <p>
+        <b>7.3.4.</b> Falência, requerer recuperação judicial ou extrajudicial ou tiver requerida
+        sua insolvência sob qualquer modalidade.
+      </p>
+    </div>
+    <p>
+      <b>7.4.</b> O cumprimento deste Contrato não está atrelado a vinculação de quaisquer das
+      Partes à plataforma da “eBarn”, sendo assim, mesmo que a Parte não seja mais usuária da
+      plataforma ela deverá cumprir todas as suas obrigações contratuais, conforme aqui
+      dispostas.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA OITAVA – PENALIDADES</p>
+    <p>
+      <b>8.1.</b> O descumprimento de qualquer das obrigações contratuais acarretará, após
+      prévia notificação ou interpelação, facultada à parte inocente, de forma sucessiva:
+    </p>
+    <div class="subsecao">
+      <p>
+        <b>8.1.1.</b> A suspensão da execução do presente contrato, o que faculta ao
+        <b>VENDEDOR</b> a retenção da(s) entrega(s) do Produto e ao <b>COMPRADOR</b> a suspensão
+        de eventuais pagamentos.
+      </p>
+      <p>
+        <b>8.1.2.</b> A Parte infratora ficará sujeita à multa equivalente a 20% (vinte por cento) do valor total do
+        contrato, devendo este valor ser depositado em conta de titularidade da Parte inocente em até 10 (dez) dias do
+        recebimento da notificação que informe sobre o descumprimento Contratual, sem prejuízo de eventuais indenizações
+        suplementares.
+      </p>
+      <p><b>8.1.3.</b> Em última instância, a resolução do contrato.</p>
+    </div>
+    <p>
+      <b>8.2.</b> A Parte que ensejar o descumprimento deste Contrato poderá ter o seu
+      cadastrado excluído da plataforma “eBarn”, sem prejuízo de outras penalidades e medidas
+      que podem ser adotados pela <b>INTERVENIENTE ANUENTE,</b> a seu exclusivo critério.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA NONA – DISPOSIÇÕES GERAIS</p>
+    <p>
+      <b>9.1.</b> A tolerância de uma das Partes para com a outra, relativamente ao
+      descumprimento de qualquer uma das obrigações assumidas neste contrato, será mera
+      liberalidade, não implicando novação ou renúncia a qualquer direito. A parte tolerante
+      poderá, a qualquer tempo, exigir da outra parte o fiel e cabal cumprimento de suas
+      obrigações.
+    </p>
+    <p>
+      <b>9.2.</b> As Partes declaram ter lido e estarem cientes e de pleno acordo com todos os
+      termos e condições deste Contrato, o qual foi feito em estrita observância aos limites do
+      respectivo fim econômico ou social, pela boa-fé e/ou pelos bons costumes, levando em
+      consideração inclusive que não estão em situação de premente necessidade e têm plenas
+      condições de cumprir todas as cláusulas e condições que constituem seus direitos e
+      obrigações constantes no presente instrumento.
+    </p>
+    <p>
+      <b>9.3.</b> As disposições deste instrumento somente poderão ser alteradas mediante acordo
+      escrito entre as partes, através de termos aditivos que farão parte integrante do
+      contrato, ficando, desde já, consignado que atos de tolerância não configurarão novação
+      contratual.
+    </p>
+    <p>
+      <b>9.4.</b> As notificações de assuntos referentes a este instrumento poderão ser
+      realizadas por correspondência destinada aos endereços físicos descritos na qualificação
+      das Partes e eletrônicos, abaixo indicados, com a devida confirmação de recebimento:
+    </p>
+    <p>a) E-mail do <b>VENDEDOR</b>: {{ infoProdutor.email }}</p>
+    <p>b) E-mail do <b>COMPRADOR</b>: {{ infoIndustria.email }}</p>
+    <p></p>
+    <p>
+      <b>9.5.</b> A plataforma “eBarn” não se responsabiliza por quaisquer descumprimentos,
+      total ou parcial, deste Contrato, sendo <b>VENDEDOR</b> e <b>COMPRADOR</b> os únicos e
+      exclusivos responsáveis pelas obrigações, penalidades e prejuízos decorrentes da presente
+      contratação.
+    </p>
+    <p>
+      <b>9.6.</b> O presente instrumento de contrato constitui título executivo extrajudicial,
+      conforme prevê o Art. 784 do Código de Processo Civil, quer com relação à antecipação
+      efetuada por conta do preço ou ao pagamento integral do preço, quer com referência à
+      obrigação de entregar coisa incerta, bem como, com relação às multas contratuais pactuadas
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA DÉCIMA – ASSINATURA ELETRÔNICA</p>
+    <p>
+      <b>10.1.</b> As Partes afirmam e declaram que o presente Contrato será assinado por meio eletrônico, sendo
+      consideradas válidas as referidas assinaturas feitas através da plataforma “eBarn”, por meio de assinatura
+      eletrônica com documento PDF assinado com certificado digital A1 das Partes, nos termos do Art. 10o §2º da MP
+      2200-2/2001.
+    </p>
+    <p class="subtitulo-clausula">CLÁUSULA DÉCIMA PRIMEIRA – FORO</p>
+    <p>
+      <b>11.1.</b> O foro competente será o domicílio do réu, conforme art. 46 do Código de
+      Processo Civil.
+    </p>
+
+    <p class="text-center">{{ infoIndustria.endereco.cidadeObj.nome }} – {{ infoIndustria.endereco.ufObj.uf }},
+      {{ infoLote.dataContratoExtenso }}.</p>
+    <p><b>PARTES:</b></p>
+  </div>
+  </div>
+
+  {{#if producerSubject}}
+  <div class="assinaturas">
+    <div class="assinatura">
+      <img class="logo-ebarn" src="{{ logo }}" />
+      <div class="img">
+        <img src="{{ sign.produtor }}" />
+      </div>
+      <div class="info">
+        <p>{{ producerSubject.name }}</p>
+        <p>{{ producerSubject.cpf }}</p>
+        <p>{{ producerSubject.dateSign }}</p>
+      </div>
+      <p class="placeholder">{{ infoProdutor.razaoSocial }} - Vendedor</p>
+    </div>
+
+    <div class="assinatura">
+      <img class="logo-ebarn" src="{{ logo }}" />
+      <div class="img">
+        <img src="{{ sign.industria }}" />
+      </div>
+      <div class="info">
+        <p>{{ industrySubject.name }}</p>
+        <p>{{ industrySubject.cpf }}</p>
+        <p>{{ industrySubject.dateSign }}</p>
+      </div>
+      <p class="placeholder">{{ infoIndustria.razaoSocial }} - Comprador</p>
+    </div>
+  </div>
+  {{/if}}
+
+</body>
+
+</html>

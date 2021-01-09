@@ -1,0 +1,57 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "eslint-plugin-import-helpers"
+  ],
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", "never"],
+    "function-paren-newline": "off",
+    "no-param-reassign": "off",
+    "no-prototype-builtins": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
+    "no-multi-str": "off",
+    "implicit-arrow-linebreak": "off",
+    "import/extensions": "off",
+    "prettier/prettier": "error",
+    "radix": ["error", "as-needed"],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always", // new line between groups
+        "groups": [
+          "module",
+          "/^@server\/shared/",
+          "/^@/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ],
+    "object-curly-newline": "off",
+    "operator-linebreak": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "directory": "./tsconfig.json"
+      }
+    }
+  }
+}

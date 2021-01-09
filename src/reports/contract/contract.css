@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
+@page {
+  size: A4;
+  margin: 15mm;
+  margin-bottom: 20mm;
+}
+
+:root {
+  --primary-text-color: #4d4d4d;
+  --secondary-text-color: #d0d0d0;
+  --accent-text-color: #008231;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+  font-family: 'Ubuntu', sans-serif;
+  color: var(--primary-text-color);
+}
+
+.invoice p {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.invoice-detalhes-empresa {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.invoice-detalhes-empresa .invoice-id h2 {
+  color: var(--accent-text-color);
+}
+
+.invoice-detalhes-cliente {
+  margin-top: 1rem;
+}
+
+.invoice-detalhes-cliente p.subtitle {
+  color: var(--secondary-text-color);
+}
+
+.invoice-detalhes-cliente div.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.invoice-detalhes-cliente div.content .invoice-info {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.invoice-detalhes-cliente div.content .invoice-info .label {
+  color: var(--secondary-text-color);
+  margin-right: 0.5rem;
+}
+
+.invoice-detalhes-cliente div.content .invoice-info :not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.invoice-detalhes-itens {
+  margin-top: 1.5rem;
+}
+
+.invoice-detalhes-itens table {
+  width: 100%;
+  text-align: left;
+}
+
+.invoice-detalhes-itens table tr {
+  min-height: 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+}
+
+.invoice-detalhes-itens table th {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.invoice-detalhes-itens table td {
+  font-weight: lighter;
+}
+
+.invoice-detalhes-itens table th,
+.invoice-detalhes-itens table td {
+  padding: 0 0.5rem;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.invoice-detalhes-itens table th:first-of-type,
+.invoice-detalhes-itens table td:first-of-type {
+  padding-left: 1.5rem;
+}
+
+.invoice-detalhes-itens table th:last-of-type,
+.invoice-detalhes-itens table td:last-of-type {
+  padding-right: 1.5rem;
+}
+
+.invoice-detalhes-itens table tr .index {
+  flex: 0.1;
+  font-weight: 700;
+}
+
+.invoice-detalhes-itens table tr .produto {
+  flex: 0.7;
+}
+
+.invoice-detalhes-itens table tr .total {
+  flex: 0.35;
+}
+
+.invoice-detalhes-itens table tr .qtd {
+  flex: 0.3;
+}
+
+.invoice-detalhes-itens table tr .preco {
+  flex: 0.35;
+}
+
+.invoice-detalhes-itens table tr {
+  display: flex;
+}
+
+.endereco-retirada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 1.5rem;
+}
+
+.endereco-retirada small {
+  font-weight: 700;
+}
+
+.invoice-detalhes-pagamento {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.invoice-detalhes-pagamento > * {
+  flex: 1 1 100%;
+  padding: 0.5rem;
+}
+
+.invoice-detalhes-pagamento .forma-pagamento {
+  max-width: 60%;
+}
+
+.invoice-detalhes-pagamento .detalhamento-valor-total {
+  max-width: 40%;
+}
+
+.invoice-detalhes-pagamento > :not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.invoice-detalhes-pagamento h2.subtitle {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.invoice-detalhes-pagamento div.content {
+  margin-top: 0.5rem;
+}
+.invoice-detalhes-pagamento div.content div.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.25rem 0;
+}
+
+.invoice-detalhes-pagamento .detalhamento-valor-total div.content div.row {
+  padding: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.contrato {
+  margin-top: 5rem;
+}
+
+.contrato .titulo-contrato {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contrato p {
+  margin-bottom: 1rem;
+
+  color: black;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: lighter;
+  text-align: justify;
+}
+
+.contrato .subtitulo-clausula {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.contrato .subsecao,
+.contrato .descricao-produto {
+  width: 80%;
+  margin: 1.5rem auto;
+}
+
+.contrato .descricao-produto p {
+  line-height: 1;
+}
+
+.contrato .tabela-classificacao .principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 95%;
+  margin: 5px auto;
+}
+
+.contrato .tabela-classificacao .principal .linhas:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.contrato .tabela-classificacao .principal .linhas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.contrato .tabela-classificacao .principal .linhas p {
+  margin: 0.25rem;
+}
+
+.contrato table {
+  width: 80%;
+  margin: 1.5rem auto;
+}
+
+.contrato table th {
+  font-size: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.contrato table td {
+  text-align: center;
+}
+.assinaturas .assinatura {
+  display: flex;
+  align-items: center;
+  justify-items: right;
+
+  position: relative;
+  height: 120px;
+  padding: 20px;
+  margin-top: 2rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.assinaturas .assinatura > * {
+  flex: 1 1 100%;
+  max-width: 50%;
+}
+
+.assinaturas .assinatura .img img {
+  width: 100%;
+}
+
+.assinaturas .assinatura .logo-ebarn {
+  position: absolute;
+  left: 50%;
+  width: 75px;
+  transform: translateX(-50%);
+}
+
+.assinaturas .assinatura .placeholder {
+  font-size: 14px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+}
+
+/* UTILS */
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-bold {
+  font-weight: bold !important;
+}

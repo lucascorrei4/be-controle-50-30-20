@@ -1,0 +1,16 @@
+{
+  "production": true,
+  "urlService": "https://api.ebarn.com.br",
+  "urlServerCms": "https://ebarn.com.br/api",
+  "urlServerCatmat": "https://ebarn.com.br/api/catmat",
+  "urlPay": "https://pay.ebarn.com.br",
+  "db": {
+    "host": "ebarn-dev.c5eh9o8vypl2.us-east-2.rds.amazonaws.com",
+    "port": 5432,
+    "username": "usr_ebarn",
+    "password": "Z5)bB]a-Gh",
+    "database": "ebarn"
+  },
+  "mongodb": "mongodb://localhost:27017/controle-prod",
+  "urlAppNode": "https://apinode.ebarn.com.br"
+}
