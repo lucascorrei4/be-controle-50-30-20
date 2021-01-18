@@ -28,8 +28,8 @@ class LaunchController {
 
   public async remove(req: Request, res: Response): Promise<Response> {
     try {
-      const { email } = req.body;
-      await Launch.findOneAndDelete({ email });
+      const { _id } = req.body;
+      await Launch.findOneAndDelete({ _id });
       return res.status(200).send();
     } catch (err) {
       return res.status(400).send({ error: err.message });

@@ -34,6 +34,7 @@ import receiptsRoutes from '@routes/receipts.routes';
 import AuthService from '@services/AuthService';
 import LaunchController from '@controllers/LaunchController';
 import CategoryController from '@controllers/CategoryController';
+import RepeatedLaunchController from '@controllers/RepeatedLaunchController';
 
 const upload = multer(uploadConfig);
 const uploadBanner = multer(uploadBanners);
@@ -52,6 +53,11 @@ routes.get('/user/all', UserController.findAll);
 // Launch Controller
 routes.post('/launch', LaunchController.create);
 routes.get('/launch/findByUserIdAndMonthAndType', LaunchController.findByUserIdAndMonthAndType);
+// routes.delete('/launch', LaunchController.remove);
+
+// RepeatLaunch Controller
+routes.post('/repeated-launch', RepeatedLaunchController.create);
+routes.get('/repeated-launch/findByUserIdAndType', RepeatedLaunchController.findByUserIdAndType);
 // routes.delete('/launch', LaunchController.remove);
 
 // Category Controller
