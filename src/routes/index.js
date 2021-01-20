@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Router } from 'express';
 import multer from 'multer';
 
@@ -58,6 +59,7 @@ routes.get('/launch/findByUserIdAndMonthAndType', LaunchController.findByUserIdA
 // RepeatLaunch Controller
 routes.post('/repeated-launch', RepeatedLaunchController.create);
 routes.get('/repeated-launch/findByUserIdAndType', RepeatedLaunchController.findByUserIdAndType);
+routes.get('/repeated-launch/findByCategoryAndValue', RepeatedLaunchController.findByCategoryAndValue);
 // routes.delete('/launch', LaunchController.remove);
 
 // Category Controller

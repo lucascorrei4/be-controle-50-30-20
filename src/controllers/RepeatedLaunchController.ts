@@ -16,12 +16,18 @@ class RepeatedLaunchController {
   }
 
   public async findByUserIdAndType(req: Request, res: Response): Promise<Response> {
-    console.log(req); // eslint-disable-line
     await RepeatedLaunchService.validateFieldsEmail(req);
     const { userId, type } = req.query;
     const repeatedLaunch = type
       ? await RepeatedLaunch.find({ userId, type })
       : await RepeatedLaunch.find({ userId });
+    console.log(repeatedLaunch); // eslint-disable-line
+    return res.status(200).json(repeatedLaunch);
+  }
+
+  public async findByCategoryAndValue(req: Request, res: Response): Promise<Response> {
+    const { userId, categoryId, valor } = req.query;
+    const repeatedLaunch = await RepeatedLaunch.find({ userId, categoryId, valor });
     console.log(repeatedLaunch); // eslint-disable-line
     return res.status(200).json(repeatedLaunch);
   }
