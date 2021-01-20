@@ -36,6 +36,7 @@ import AuthService from '@services/AuthService';
 import LaunchController from '@controllers/LaunchController';
 import CategoryController from '@controllers/CategoryController';
 import RepeatedLaunchController from '@controllers/RepeatedLaunchController';
+import EarningController from '@controllers/EarningController';
 
 const upload = multer(uploadConfig);
 const uploadBanner = multer(uploadBanners);
@@ -54,6 +55,11 @@ routes.get('/user/all', UserController.findAll);
 // Launch Controller
 routes.post('/launch', LaunchController.create);
 routes.get('/launch/findByUserIdAndMonthAndType', LaunchController.findByUserIdAndMonthAndType);
+// routes.delete('/launch', LaunchController.remove);
+
+// Earning Controller
+routes.post('/earning', EarningController.create);
+routes.get('/earning/findEarningByUserIdAndRef', EarningController.findEarningByUserIdAndRef);
 // routes.delete('/launch', LaunchController.remove);
 
 // RepeatLaunch Controller
