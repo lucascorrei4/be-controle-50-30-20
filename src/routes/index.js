@@ -55,18 +55,18 @@ routes.get('/user/all', UserController.findAll);
 // Launch Controller
 routes.post('/launch', LaunchController.create);
 routes.get('/launch/findByUserIdAndMonthAndType', LaunchController.findByUserIdAndMonthAndType);
-// routes.delete('/launch', LaunchController.remove);
+routes.delete('/launch', LaunchController.remove);
 
 // Earning Controller
 routes.post('/earning', EarningController.create);
 routes.get('/earning/findEarningByUserIdAndRef', EarningController.findEarningByUserIdAndRef);
-// routes.delete('/launch', LaunchController.remove);
+routes.delete('/earning', EarningController.remove);
 
 // RepeatLaunch Controller
 routes.post('/repeated-launch', RepeatedLaunchController.create);
 routes.get('/repeated-launch/findByUserIdAndType', RepeatedLaunchController.findByUserIdAndType);
 routes.get('/repeated-launch/findByCategoryAndValue', RepeatedLaunchController.findByCategoryAndValue);
-// routes.delete('/launch', LaunchController.remove);
+routes.delete('/repeated-launch', RepeatedLaunchController.remove);
 
 // Category Controller
 routes.post('/category', CategoryController.store);

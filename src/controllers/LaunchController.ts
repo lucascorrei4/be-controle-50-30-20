@@ -28,7 +28,7 @@ class LaunchController {
 
   public async remove(req: Request, res: Response): Promise<Response> {
     try {
-      const { _id } = req.body;
+      const { _id } = req.query;
       await Launch.findOneAndDelete({ _id });
       return res.status(200).send();
     } catch (err) {
