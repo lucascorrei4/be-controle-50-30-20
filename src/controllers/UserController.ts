@@ -23,11 +23,9 @@ class UserController {
   }
 
   public async findByEmail(req: Request, res: Response): Promise<Response> {
-    console.log(req); // eslint-disable-line
     await UserService.validateFields(req);
     const { email } = req.query;
     const user = await User.findOne({ email });
-    console.log(user); // eslint-disable-line
     return res.status(200).json(user);
   }
 

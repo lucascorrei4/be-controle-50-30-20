@@ -16,13 +16,11 @@ class LaunchController {
   }
 
   public async findByUserIdAndMonthAndType(req: Request, res: Response): Promise<Response> {
-    console.log(req); // eslint-disable-line
     await LaunchService.validateFieldsEmailMonth(req);
     const { userId, month, type } = req.query;
     const launch = type
       ? await Launch.find({ userId, month, type })
       : await Launch.find({ userId, month });
-    console.log(launch); // eslint-disable-line
     return res.status(200).json(launch);
   }
 

@@ -64,11 +64,7 @@ class DestaqueController {
 
   public async active(req: Request, res: Response): Promise<Response> {
     try {
-      console.log(
-        `Recebeu comando de ativação: ás ${new Date()} - Código Ativ.: ${
-          req.query?.codigo
-        } - Lead: ${req.query.nome}`
-      );
+     
       const emailsAdmins = emailsAdminsJson;
       const codigoAtivacao = String(req.query.codigo);
       let idUsuario;

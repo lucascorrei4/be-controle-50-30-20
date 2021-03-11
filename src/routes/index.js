@@ -37,6 +37,7 @@ import LaunchController from '@controllers/LaunchController';
 import CategoryController from '@controllers/CategoryController';
 import RepeatedLaunchController from '@controllers/RepeatedLaunchController';
 import EarningController from '@controllers/EarningController';
+import AccountController from '@controllers/AccountController';
 
 const upload = multer(uploadConfig);
 const uploadBanner = multer(uploadBanners);
@@ -72,6 +73,11 @@ routes.delete('/repeated-launch', RepeatedLaunchController.remove);
 routes.post('/category', CategoryController.store);
 routes.get('/category', CategoryController.index);
 routes.delete('/category', CategoryController.removeAll);
+
+// Account Controller
+routes.post('/account', AccountController.store);
+routes.get('/account', AccountController.index);
+routes.delete('/account', AccountController.removeAll);
 
 routes.get('/destaques', DestaqueController.index);
 routes.get('/pages', AuthService.authorize, PageController.index);

@@ -7,8 +7,6 @@ class EarningController {
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       const earning = await Earning.findOneAndUpdate(req.body);
-      console.log(earning);
-      
       return res.status(200).json(earning);
     } catch (err) {
       console.error(err); // eslint-disable-line
@@ -17,11 +15,9 @@ class EarningController {
   }
 
   public async findEarningByUserIdAndRef(req: Request, res: Response): Promise<Response> {
-    console.log(req); // eslint-disable-line
     await EarningService.validateFieldsUserIdAndRef(req);
     const { userId, ref } = req.query;
     const earning = await Earning.findOne({ userId, ref });
-    console.log(earning); // eslint-disable-line
     return res.status(200).json(earning);
   }
 
