@@ -4,7 +4,6 @@ import User, { UserInterface } from '@schemas/User';
 import UserService from '@services/UserService';
 
 class UserController {
-  
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       await UserService.validateAllFields(req);
@@ -26,6 +25,13 @@ class UserController {
     await UserService.validateFields(req);
     const { email } = req.query;
     const user = await User.findOne({ email });
+    return res.status(200).json(user);
+  }
+
+  public async findByEmailAndPassword(req: Request, res: Response): Promise<Response> {
+    await UserService.validateFields(req);
+    const { email, password } = req.query;
+    const user = await User.findOne({ email, password });
     return res.status(200).json(user);
   }
 

@@ -50,6 +50,7 @@ routes.post('/auth', AuthController.auth);
 // User Controller
 routes.post('/user', UserController.create);
 routes.get('/user/findByEmail', UserController.findByEmail);
+routes.get('/user/findByEmailAndPassword', UserController.findByEmailAndPassword);
 routes.get('/user/all', UserController.findAll);
 // routes.delete('/user', UserController.remove);
 
