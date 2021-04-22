@@ -1,20 +1,20 @@
 import { Document, Schema, model } from 'mongoose';
 
 export interface AccountInterface extends Document {
-  accountId: number;
-  users: [{ userId; email }];
+  users: [{ mail: string }];
   createdDate?: Date;
   expirationDate?: Date;
   isActive?: boolean;
+  plan?: 'FREE' | 'PREMIUM';
 }
 
 const AccountSchema: Schema<AccountInterface> = new Schema(
   {
-    accountId: { type: Number },
-    users: [{ userId: Number, email: String }],
+    users: [{ mail: String }],
     createdDate: { type: Date },
     expirationDate: { type: Date },
-    isActive: { type: Boolean }
+    isActive: { type: Boolean },
+    plan: { type: String, required: true, default: 'FREE' }
   },
   {
     versionKey: false

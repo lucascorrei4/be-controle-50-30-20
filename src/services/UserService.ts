@@ -1,46 +1,32 @@
+import User, { UserInterface } from '@schemas/User';
 import { Request, Response } from 'express';
 
-import Lead, { LeadInterface } from '@schemas/User';
-
 class UserService {
-
   public validateFields(req: Request) {
-    const { email } = req.query;
+    const { mail } = req.query;
 
-    if (!email) {
+    if (!mail) {
       throw new Error('"E-mail" is required');
     }
   }
 
   public validateAllFields(req: Request) {
-    const { nome, email, telefone, ref } = req.body;
-    if (!nome) {
-      throw new Error('"nome" is required');
-    }
-    if (!email) {
-      throw new Error('"E-mail" is required');
-    }
-    if (!telefone) {
-      throw new Error('"telefone" is required');
-    }
-    if (!email) {
-      throw new Error('"E-mail" is required');
-    }
-    if (!ref) {
-      throw new Error('"ref" is required');
+    const { mail } = req.body;
+    if (!mail) {
+      throw new Error('"mail" is required');
     }
   }
 
-  public async find(email: string): Promise<LeadInterface> {
-    const lead = await Lead.findOne({
-      email
+  public async find(mail: string): Promise<UserInterface> {
+    const user = await User.findOne({
+      mail
     });
-    return lead;
+    return user;
   }
 
   public async findAll(req: Request, res: Response): Promise<Response> {
-    const leads = await Lead.find().sort({ createdAt: -1 });
-    return res.json(leads);
+    const users = await User.find().sort({ createdAt: -1 });
+    return res.json(users);
   }
 }
 
