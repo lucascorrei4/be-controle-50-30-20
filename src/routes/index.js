@@ -57,11 +57,13 @@ routes.get('/user/all', UserController.findAll);
 // Launch Controller
 routes.post('/launch', LaunchController.create);
 routes.get('/launch/findByUserIdAndMonthAndType', LaunchController.findByUserIdAndMonthAndType);
+routes.get('/launch/findByAccountIdAndMonthAndType', LaunchController.findByAccountIdAndMonthAndType);
 routes.delete('/launch', LaunchController.remove);
 
 // Earning Controller
 routes.post('/earning', EarningController.create);
 routes.get('/earning/findEarningByUserIdAndRef', EarningController.findEarningByUserIdAndRef);
+routes.get('/earning/findEarningByAccountIdAndRef', EarningController.findEarningByAccountIdAndRef);
 routes.delete('/earning', EarningController.remove);
 
 // RepeatLaunch Controller

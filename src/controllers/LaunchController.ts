@@ -24,6 +24,15 @@ class LaunchController {
     return res.status(200).json(launch);
   }
 
+  public async findByAccountIdAndMonthAndType(req: Request, res: Response): Promise<Response> {
+    await LaunchService.validateFieldsAccountIdMonth(req);
+    const { accountId, month, type } = req.query;
+    const launch = type
+      ? await Launch.find({ accountId, month, type })
+      : await Launch.find({ accountId, month });
+    return res.status(200).json(launch);
+  }
+
   public async remove(req: Request, res: Response): Promise<Response> {
     try {
       const { _id } = req.query;

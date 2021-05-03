@@ -6,7 +6,9 @@ import EarningService from '@services/EarningService';
 class EarningController {
   public async create(req: Request, res: Response): Promise<Response> {
     try {
+      console.log(req.body);
       const earning = await Earning.findOneAndUpdate(req.body);
+      if (!earning) await Earning.create(req.body);
       return res.status(200).json(earning);
     } catch (err) {
       console.error(err); // eslint-disable-line
@@ -18,6 +20,13 @@ class EarningController {
     await EarningService.validateFieldsUserIdAndRef(req);
     const { userId, ref } = req.query;
     const earning = await Earning.findOne({ userId, ref });
+    return res.status(200).json(earning);
+  }
+
+  public async findEarningByAccountIdAndRef(req: Request, res: Response): Promise<Response> {
+    await EarningService.validateFieldsAccountIdAndRef(req);
+    const { accountId, ref } = req.query;
+    const earning = await Earning.findOne({ accountId, ref });
     return res.status(200).json(earning);
   }
 

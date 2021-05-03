@@ -2,6 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 
 export interface LaunchInterface extends Document {
   userId?: string;
+  accountId?: string;
   month?: string;
   type?: 'FIXAS' | 'VARIAVEIS' | 'INVESTIMENTOS';
   categoryId?: number;
@@ -13,6 +14,7 @@ export interface LaunchInterface extends Document {
 const LaunchSchema: Schema<LaunchInterface> = new Schema(
   {
     userId: { type: String, required: true },
+    accountId: { type: String, required: true },
     month: { type: String, required: true },
     type: { type: String, required: true, default: 'FIXAS' },
     categoryId: { type: Number, required: true },

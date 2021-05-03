@@ -15,6 +15,18 @@ class LaunchService {
     }
   }
 
+  public validateFieldsAccountIdMonth(req: Request) {
+    const { accountId, month } = req.query;
+
+    if (!accountId) {
+      throw new Error('"accountId" is required');
+    }
+
+    if (!month) {
+      throw new Error('"month" is required');
+    }
+  }
+
   public validateAllFields(req: Request) {
     const { userId, month, type } = req.body;
     if (!userId) {

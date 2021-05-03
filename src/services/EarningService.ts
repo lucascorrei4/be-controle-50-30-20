@@ -15,6 +15,18 @@ class EarningService {
     }
   }
 
+  public validateFieldsAccountIdAndRef(req: Request) {
+    const { accountId, ref } = req.query;
+
+    if (!accountId) {
+      throw new Error('"accountId" is required');
+    }
+
+    if (!ref) {
+      throw new Error('"Ref" is required');
+    }
+  }
+
   public async find(userId: string, email: string): Promise<EarningInterface> {
     const launch = await Earning.findOne({ userId, email });
     return launch;
